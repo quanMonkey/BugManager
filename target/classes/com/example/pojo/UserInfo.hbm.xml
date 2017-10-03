@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.example.pojo.UserInfo" table="UserInfo" schema="part01">
+        <id name="userId" type="java.lang.String">
+            <column name="userID"  length="50"/>
+            <generator class="assigned"/>
+        </id>
+        <property name="nickName" type="java.lang.String">
+            <column name="nickName"  length="30" />
+        </property>
+        <property name="userName" type="java.lang.String">
+            <column name="userName" length="30" />
+        </property>
+        <property name="tellPhone" type="java.lang.String">
+            <column name="tellPhone"  length="15" />
+        </property>
+        <property name="address" type="java.lang.String">
+            <column name="address" length="50" />
+        </property>
+        <property name="sex" type="java.lang.String">
+            <column name="sex"  length="1" />
+        </property>
+        <property name="age" type="java.lang.Integer">
+            <column name="age"  />
+        </property>
+        <property name="registerTime" type="java.util.Date">
+            <column name="registerTime" />
+        </property>
+        <many-to-one name="systemAccountStatusByStatusId" class="com.example.pojo.SystemAccountStatus">
+            <column name="statusID"/>
+        </many-to-one>
+    </class>
+</hibernate-mapping>

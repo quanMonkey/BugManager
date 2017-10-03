@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/tx
+       http://www.springframework.org/schema/tx/spring-tx.xsd
+       ">
+
+    <context:component-scan base-package="com.example.dao,com.example.services" />
+
+    <!-- 声明数据源 -->
+    <bean name="datasource" class="org.springframework.jdbc.datasource.DriverManagerDataSource"
+          p:driverClassName="com.mysql.jdbc.Driver"
+          p:url="jdbc:mysql://127.0.0.1/part01?useUnicode=true&amp;characterEncoding=utf-8"
+          p:username="root"
+          p:password="123456"/>
+
+    <!-- 创建hibernate SessionFactory
+         packageToScan 用于指定hibernate实体类对应的*.hbm.xml文件地址
+    -->
+    <bean name="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean"
+          p:dataSource-ref="datasource"
+          p:mappingLocations="classpath:com/example/pojo/*.hbm.xml"
+          p:configLocation="classpath:hibernate.cfg.xml">
+        <property name="hibernateProperties">
+            <props>
+                <!--设置方言-->
+                <prop key="hibernate.dialect">
+                    org.hibernate.dialect.MySQL5Dialect
+                </prop>
+                <!--是否打印sql-->
+                <prop key="hibernate.show_sql">
+                    true
+                </prop>
+            </props>
+        </property>
+    </bean>
+
+    <!-- 声明事物管理-->
+    <bean name="myHibTxManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager"
+          p:sessionFactory-ref="sessionFactory" />
+
+    <!-- 配置事物增强 -->
+    <tx:advice id="tx_advice" transaction-manager="myHibTxManager">
+        <tx:attributes>
+            <tx:method name="get*" propagation="REQUIRED" read-only="true"/>
+            <tx:method name="load*" propagation="REQUIRED" read-only="true"/>
+            <tx:method name="search*" propagation="REQUIRED" read-only="true"/>
+            <tx:method name="*" propagation="REQUIRED"/>
+        </tx:attributes>
+    </tx:advice>
+
+    <!-- 配置切面：切点和增强组合而成
+         切点指定在某个类的某个方法上添加增强
+     -->
+    <aop:config>
+        <aop:pointcut id="serviceMethod" expression="execution(* com.example.services.*.*(..))"/>
+        <aop:advisor advice-ref="tx_advice" pointcut-ref="serviceMethod"/>
+    </aop:config>
+
+    <!-- 创建hibernateTemplate -->
+    <bean name="hibernateTemplate" class="org.springframework.orm.hibernate4.HibernateTemplate"
+          p:sessionFactory-ref="sessionFactory"/>
+
+</beans>

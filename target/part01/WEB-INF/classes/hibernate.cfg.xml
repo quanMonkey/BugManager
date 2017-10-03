@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+    "-//Hibernate/Hibernate Configuration DTD//EN"
+    "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory>
+
+      <!--<property name="connection.url">-->
+      <!--<![CDATA[jdbc:mysql://127.0.0.1/part01?useUnicode=true&characterEncoding=utf-8]]></property>-->
+    <!--<property name="connection.driver_class">com.mysql.jdbc.Driver</property>-->
+    <!--<mapping resource="com/example/pojo/UserLoginEntity.hbm.xml"/>-->
+    <!-- <property name="connection.username"/> -->
+    <!-- <property name="connection.password"/> -->
+
+    <!-- DB schema will be updated if needed -->
+    <!-- <property name="hbm2ddl.auto">update</property> -->
+      <!--<mapping resource="com/example/pojo/AccountInfo.hbm.xml"/>-->
+      <!--<mapping resource="com/example/pojo/LoginRecord.hbm.xml"/>-->
+      <!--<mapping resource="com/example/pojo/SystemAccountStatus.hbm.xml"/>-->
+      <!--<mapping resource="com/example/pojo/UserInfo.hbm.xml"/>-->
+      <!--<mapping class="com.example.pojo.AccountInfo"/>-->
+
+      <!--<mapping class="com.example.pojo.LoginRecord"/>-->
+      <!--<mapping class="com.example.pojo.SystemAccountStatus"/>-->
+      <!--<mapping class="com.example.pojo.UserInfo"/>-->
+  </session-factory>
+</hibernate-configuration>

@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.example.pojo.SystemAccountStatus" table="System_AccountStatus" schema="part01" where="statusName=2">
+        <id name="statusId" type="java.lang.Integer">
+            <column name="statusID" />
+            <generator class="identity"/>
+        </id>
+        <property name="statusName" type="java.lang.String">
+            <column name="statusName" length="10"/>
+        </property>
+        <property name="statusComment" type="java.lang.String">
+            <column name="statusComment" length="50" not-null="true"/>
+        </property>
+    </class>
+</hibernate-mapping>

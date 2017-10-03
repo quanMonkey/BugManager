@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping >
+
+    <class name="com.example.pojo.AccountInfo" table="AccountInfo" schema="part01" >
+        <id name="accountId" type="java.lang.Integer" >
+            <column name="accountID" sql-type="int(11)"/>
+            <generator class="identity"/>
+        </id>
+        <property name="account" type="java.lang.String">
+            <column name="account" length="30"/>
+        </property>
+        <property name="pwd" type="java.lang.String">
+            <column name="pwd"  length="100"/>
+        </property>
+        <many-to-one name="userInfoByUserId" class="com.example.pojo.UserInfo">
+            <column name="userID" unique="true"/>
+        </many-to-one>
+    </class>
+</hibernate-mapping>
