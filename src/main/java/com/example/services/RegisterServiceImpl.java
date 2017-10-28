@@ -2,7 +2,9 @@ package com.example.services;
 
 import com.example.dao.BaseDao;
 import com.example.dao.RegisterDao;
+import com.example.dao.TestDao;
 import com.example.pojo.AccountInfo;
+import com.example.pojo.Employee;
 import com.example.pojo.SystemAccountStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +22,8 @@ public class RegisterServiceImpl implements RegisterService {
 
     @Autowired
     private BaseDao registerDao;
+    @Autowired
+    private TestDao testDao;
 
 
     public boolean createAccount(AccountInfo accountInfo) {
@@ -31,6 +35,12 @@ public class RegisterServiceImpl implements RegisterService {
         registerDao.getCurrentSession().save(accountInfo.getUserInfoByUserId());
         registerDao.save(accountInfo);
         return false;
+    }
+
+    public void test(){
+        Employee e = new Employee();
+        e.setName("test");
+        testDao.save(e);
     }
 
 

@@ -9,4 +9,6 @@ import org.springframework.stereotype.Service;
 @Service
 public interface RegisterService {
     public boolean createAccount(AccountInfo accountInfo);
+
+    public void test();
 }

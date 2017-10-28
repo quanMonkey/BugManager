@@ -25,21 +25,27 @@
           p:password="123456"/>
 
     <!-- 创建hibernate SessionFactory
-         packageToScan 用于指定hibernate实体类对应的*.hbm.xml文件地址
+         packageToScan 用于指定hibernate实体类所在的包路径
+          p:mappingLocations="classpath:com/example/pojo/*.hbm.xml"
+          p:configLocation="classpath:hibernate.cfg.xml"
+           org.hibernate.dialect.MySQL5Dialect
     -->
     <bean name="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean"
           p:dataSource-ref="datasource"
-          p:mappingLocations="classpath:com/example/pojo/*.hbm.xml"
+          p:packagesToScan="com.example.pojo"
           p:configLocation="classpath:hibernate.cfg.xml">
         <property name="hibernateProperties">
             <props>
                 <!--设置方言-->
                 <prop key="hibernate.dialect">
-                    org.hibernate.dialect.MySQL5Dialect
+                    org.hibernate.dialect.MySQLDialect
                 </prop>
                 <!--是否打印sql-->
                 <prop key="hibernate.show_sql">
                     true
+                </prop>
+                <prop key="hibernate.hbm2ddl.auto">
+                    create
                 </prop>
             </props>
         </property>

@@ -25,7 +25,8 @@ public class RegisterController extends BaseController {
 
     @RequestMapping("/registerAccount")
     public ModelAndView registerAccount(AccountInfo accountInfo){
-        registerService.createAccount(accountInfo);
+        registerService.test();
+        //        registerService.createAccount(accountInfo);
         ModelAndView mdv = new ModelAndView();
         mdv.setViewName("/index.jsp");
         return mdv;
