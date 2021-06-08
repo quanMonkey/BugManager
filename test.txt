@@ -1,2 +1,4 @@
 第一次使用vim编辑器
 ddgits
+
+dd
